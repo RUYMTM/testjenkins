@@ -1,12 +1,13 @@
 pipeline {
     agent any
     tools {
-        git url: 'https://github.com/RUYMTM/testjenkins.git'
+        
         maven "M3"
     }
     stages {
         stage('Build') {
             steps {
+                git 'https://github.com/RUYMTM/testjenkins.git'
                 bat "mvn -B -DskipTests clean package"
             }
         }
