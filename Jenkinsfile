@@ -1,22 +1,8 @@
-node {
-    def mvnHome
-    stage('Preparation') { // for display purposes
-        // Get some code from a GitHub repository
-        git 'https://github.com/RUYMTM/testjenkins.git'
-        mvnHome = tool 'M3'
-    }
+node('docker') {
+    checkout scm
     stage('Build') {
-        // Run the maven build
-        withEnv(["MVN_HOME=$mvnHome"]) {
-            if (isUnix()) {
-                sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
-            } else {
-                bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-            }
+        docker.image('maven:3.6.3').inside {
+            bat 'mvn --version'
         }
-    }
-    stage('Results') {
-        junit '**/target/surefire-reports/TEST-*.xml'
-        archiveArtifacts 'target/*.jar'
     }
 }
