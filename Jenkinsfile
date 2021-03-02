@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                git 'https://github.com/RUYMTM/testjenkins.git'
                 bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
