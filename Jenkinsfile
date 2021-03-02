@@ -1,6 +1,7 @@
 pipeline {
     agent any
     tools {
+        git url: 'https://github.com/RUYMTM/testjenkins.git'
         maven "M3"
     }
     stages {
