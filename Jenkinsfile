@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/RUYMTM/testjenkins.git'
-                bat "mvn compile"
+                bat "mvn clean package"
             }
         }
         stage('Test') {
